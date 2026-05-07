@@ -9,234 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TemplatesRouteImport } from './routes/templates'
-import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as EscalationsRouteImport } from './routes/escalations'
-import { Route as DepartmentsRouteImport } from './routes/departments'
-import { Route as AuditRouteImport } from './routes/audit'
-import { Route as AssignmentsRouteImport } from './routes/assignments'
-import { Route as ApprovalsRouteImport } from './routes/approvals'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as RequestsIndexRouteImport } from './routes/requests.index'
-import { Route as RespondTokenRouteImport } from './routes/respond.$token'
-import { Route as RequestsNewRouteImport } from './routes/requests.new'
-import { Route as RequestsIdRouteImport } from './routes/requests.$id'
 
-const TemplatesRoute = TemplatesRouteImport.update({
-  id: '/templates',
-  path: '/templates',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EscalationsRoute = EscalationsRouteImport.update({
-  id: '/escalations',
-  path: '/escalations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DepartmentsRoute = DepartmentsRouteImport.update({
-  id: '/departments',
-  path: '/departments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuditRoute = AuditRouteImport.update({
-  id: '/audit',
-  path: '/audit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssignmentsRoute = AssignmentsRouteImport.update({
-  id: '/assignments',
-  path: '/assignments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApprovalsRoute = ApprovalsRouteImport.update({
-  id: '/approvals',
-  path: '/approvals',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RequestsIndexRoute = RequestsIndexRouteImport.update({
-  id: '/requests/',
-  path: '/requests/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RespondTokenRoute = RespondTokenRouteImport.update({
-  id: '/respond/$token',
-  path: '/respond/$token',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RequestsNewRoute = RequestsNewRouteImport.update({
-  id: '/requests/new',
-  path: '/requests/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RequestsIdRoute = RequestsIdRouteImport.update({
-  id: '/requests/$id',
-  path: '/requests/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/approvals': typeof ApprovalsRoute
-  '/assignments': typeof AssignmentsRoute
-  '/audit': typeof AuditRoute
-  '/departments': typeof DepartmentsRoute
-  '/escalations': typeof EscalationsRoute
-  '/settings': typeof SettingsRoute
-  '/templates': typeof TemplatesRoute
-  '/requests/$id': typeof RequestsIdRoute
-  '/requests/new': typeof RequestsNewRoute
-  '/respond/$token': typeof RespondTokenRoute
-  '/requests/': typeof RequestsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/approvals': typeof ApprovalsRoute
-  '/assignments': typeof AssignmentsRoute
-  '/audit': typeof AuditRoute
-  '/departments': typeof DepartmentsRoute
-  '/escalations': typeof EscalationsRoute
-  '/settings': typeof SettingsRoute
-  '/templates': typeof TemplatesRoute
-  '/requests/$id': typeof RequestsIdRoute
-  '/requests/new': typeof RequestsNewRoute
-  '/respond/$token': typeof RespondTokenRoute
-  '/requests': typeof RequestsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/approvals': typeof ApprovalsRoute
-  '/assignments': typeof AssignmentsRoute
-  '/audit': typeof AuditRoute
-  '/departments': typeof DepartmentsRoute
-  '/escalations': typeof EscalationsRoute
-  '/settings': typeof SettingsRoute
-  '/templates': typeof TemplatesRoute
-  '/requests/$id': typeof RequestsIdRoute
-  '/requests/new': typeof RequestsNewRoute
-  '/respond/$token': typeof RespondTokenRoute
-  '/requests/': typeof RequestsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/approvals'
-    | '/assignments'
-    | '/audit'
-    | '/departments'
-    | '/escalations'
-    | '/settings'
-    | '/templates'
-    | '/requests/$id'
-    | '/requests/new'
-    | '/respond/$token'
-    | '/requests/'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/approvals'
-    | '/assignments'
-    | '/audit'
-    | '/departments'
-    | '/escalations'
-    | '/settings'
-    | '/templates'
-    | '/requests/$id'
-    | '/requests/new'
-    | '/respond/$token'
-    | '/requests'
-  id:
-    | '__root__'
-    | '/'
-    | '/approvals'
-    | '/assignments'
-    | '/audit'
-    | '/departments'
-    | '/escalations'
-    | '/settings'
-    | '/templates'
-    | '/requests/$id'
-    | '/requests/new'
-    | '/respond/$token'
-    | '/requests/'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApprovalsRoute: typeof ApprovalsRoute
-  AssignmentsRoute: typeof AssignmentsRoute
-  AuditRoute: typeof AuditRoute
-  DepartmentsRoute: typeof DepartmentsRoute
-  EscalationsRoute: typeof EscalationsRoute
-  SettingsRoute: typeof SettingsRoute
-  TemplatesRoute: typeof TemplatesRoute
-  RequestsIdRoute: typeof RequestsIdRoute
-  RequestsNewRoute: typeof RequestsNewRoute
-  RespondTokenRoute: typeof RespondTokenRoute
-  RequestsIndexRoute: typeof RequestsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/templates': {
-      id: '/templates'
-      path: '/templates'
-      fullPath: '/templates'
-      preLoaderRoute: typeof TemplatesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/escalations': {
-      id: '/escalations'
-      path: '/escalations'
-      fullPath: '/escalations'
-      preLoaderRoute: typeof EscalationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/departments': {
-      id: '/departments'
-      path: '/departments'
-      fullPath: '/departments'
-      preLoaderRoute: typeof DepartmentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/audit': {
-      id: '/audit'
-      path: '/audit'
-      fullPath: '/audit'
-      preLoaderRoute: typeof AuditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assignments': {
-      id: '/assignments'
-      path: '/assignments'
-      fullPath: '/assignments'
-      preLoaderRoute: typeof AssignmentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/approvals': {
-      id: '/approvals'
-      path: '/approvals'
-      fullPath: '/approvals'
-      preLoaderRoute: typeof ApprovalsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -244,50 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/requests/': {
-      id: '/requests/'
-      path: '/requests'
-      fullPath: '/requests/'
-      preLoaderRoute: typeof RequestsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/respond/$token': {
-      id: '/respond/$token'
-      path: '/respond/$token'
-      fullPath: '/respond/$token'
-      preLoaderRoute: typeof RespondTokenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/requests/new': {
-      id: '/requests/new'
-      path: '/requests/new'
-      fullPath: '/requests/new'
-      preLoaderRoute: typeof RequestsNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/requests/$id': {
-      id: '/requests/$id'
-      path: '/requests/$id'
-      fullPath: '/requests/$id'
-      preLoaderRoute: typeof RequestsIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApprovalsRoute: ApprovalsRoute,
-  AssignmentsRoute: AssignmentsRoute,
-  AuditRoute: AuditRoute,
-  DepartmentsRoute: DepartmentsRoute,
-  EscalationsRoute: EscalationsRoute,
-  SettingsRoute: SettingsRoute,
-  TemplatesRoute: TemplatesRoute,
-  RequestsIdRoute: RequestsIdRoute,
-  RequestsNewRoute: RequestsNewRoute,
-  RespondTokenRoute: RespondTokenRoute,
-  RequestsIndexRoute: RequestsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
