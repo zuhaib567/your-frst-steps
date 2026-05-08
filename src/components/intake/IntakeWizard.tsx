@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
@@ -34,10 +40,12 @@ export function IntakeWizard() {
   const update = <K extends keyof IntakeFormData>(key: K, value: IntakeFormData[K]) =>
     setData((d) => ({ ...d, [key]: value }));
 
-  const hasConditional = data.support.some((s) => ["AV", "Culinary", "Marketing", "IT"].includes(s));
+  const hasConditional = data.support.some((s) =>
+    ["AV", "Culinary", "Marketing", "IT"].includes(s),
+  );
   const visibleSteps = useMemo(
     () => STEPS.filter((s) => s.id !== "details" || hasConditional),
-    [hasConditional]
+    [hasConditional],
   );
   const current = visibleSteps[step];
   const progress = ((step + 1) / visibleSteps.length) * 100;
@@ -47,7 +55,13 @@ export function IntakeWizard() {
       case "requestor":
         return !!(data.ministry && data.contactName && data.email);
       case "event":
-        return !!(data.eventName && data.date && data.startTime && data.endTime && data.locationType);
+        return !!(
+          data.eventName &&
+          data.date &&
+          data.startTime &&
+          data.endTime &&
+          data.locationType
+        );
       case "scope":
         return !!(data.attendance && data.budget && data.eventType);
       case "support":
@@ -85,8 +99,8 @@ export function IntakeWizard() {
         </div>
         <h2 className="mb-2 text-3xl">Submitted for review</h2>
         <p className="text-muted-foreground">
-          Your request for <span className="font-medium text-foreground">{data.eventName}</span> has been
-          sent to the approval queue.
+          Your request for <span className="font-medium text-foreground">{data.eventName}</span> has
+          been sent to the approval queue.
         </p>
         <Button
           className="mt-8"
@@ -133,16 +147,33 @@ export function IntakeWizard() {
             {current.id === "requestor" && (
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Ministry / Group" required>
-                  <Input value={data.ministry} onChange={(e) => update("ministry", e.target.value)} placeholder="e.g. Worship Arts" />
+                  <Input
+                    value={data.ministry}
+                    onChange={(e) => update("ministry", e.target.value)}
+                    placeholder="e.g. Worship Arts"
+                  />
                 </Field>
                 <Field label="Contact Name" required>
-                  <Input value={data.contactName} onChange={(e) => update("contactName", e.target.value)} placeholder="Jane Doe" />
+                  <Input
+                    value={data.contactName}
+                    onChange={(e) => update("contactName", e.target.value)}
+                    placeholder="Jane Doe"
+                  />
                 </Field>
                 <Field label="Email" required>
-                  <Input type="email" value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="jane@church.org" />
+                  <Input
+                    type="email"
+                    value={data.email}
+                    onChange={(e) => update("email", e.target.value)}
+                    placeholder="jane@church.org"
+                  />
                 </Field>
                 <Field label="Phone">
-                  <Input value={data.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(555) 123-4567" />
+                  <Input
+                    value={data.phone}
+                    onChange={(e) => update("phone", e.target.value)}
+                    placeholder="(555) 123-4567"
+                  />
                 </Field>
               </div>
             )}
@@ -150,23 +181,41 @@ export function IntakeWizard() {
             {current.id === "event" && (
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Event Name" required className="sm:col-span-2">
-                  <Input value={data.eventName} onChange={(e) => update("eventName", e.target.value)} placeholder="Spring Outreach Night" />
+                  <Input
+                    value={data.eventName}
+                    onChange={(e) => update("eventName", e.target.value)}
+                    placeholder="Spring Outreach Night"
+                  />
                 </Field>
                 <Field label="Date" required>
-                  <Input type="date" value={data.date} onChange={(e) => update("date", e.target.value)} />
+                  <Input
+                    type="date"
+                    value={data.date}
+                    onChange={(e) => update("date", e.target.value)}
+                  />
                 </Field>
                 <div className="grid grid-cols-2 gap-3">
                   <Field label="Start Time" required>
-                    <Input type="time" value={data.startTime} onChange={(e) => update("startTime", e.target.value)} />
+                    <Input
+                      type="time"
+                      value={data.startTime}
+                      onChange={(e) => update("startTime", e.target.value)}
+                    />
                   </Field>
                   <Field label="End Time" required>
-                    <Input type="time" value={data.endTime} onChange={(e) => update("endTime", e.target.value)} />
+                    <Input
+                      type="time"
+                      value={data.endTime}
+                      onChange={(e) => update("endTime", e.target.value)}
+                    />
                   </Field>
                 </div>
                 <Field label="Location Type" required className="sm:col-span-2">
                   <RadioGroup
                     value={data.locationType}
-                    onValueChange={(v) => update("locationType", v as IntakeFormData["locationType"])}
+                    onValueChange={(v) =>
+                      update("locationType", v as IntakeFormData["locationType"])
+                    }
                     className="grid grid-cols-3 gap-3"
                   >
                     {(["in-person", "virtual", "hybrid"] as const).map((t) => (
@@ -194,30 +243,50 @@ export function IntakeWizard() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Estimated Attendance" required>
                   <Select value={data.attendance} onValueChange={(v) => update("attendance", v)}>
-                    <SelectTrigger><SelectValue placeholder="Pick a range" /></SelectTrigger>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Pick a range" />
+                    </SelectTrigger>
                     <SelectContent>
                       {["< 25", "25–75", "75–200", "200–500", "500+"].map((r) => (
-                        <SelectItem key={r} value={r}>{r}</SelectItem>
+                        <SelectItem key={r} value={r}>
+                          {r}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </Field>
                 <Field label="Budget Range" required>
                   <Select value={data.budget} onValueChange={(v) => update("budget", v)}>
-                    <SelectTrigger><SelectValue placeholder="Pick a range" /></SelectTrigger>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Pick a range" />
+                    </SelectTrigger>
                     <SelectContent>
                       {["< $500", "$500–$2K", "$2K–$10K", "$10K–$25K", "$25K+"].map((r) => (
-                        <SelectItem key={r} value={r}>{r}</SelectItem>
+                        <SelectItem key={r} value={r}>
+                          {r}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </Field>
                 <Field label="Event Type" required className="sm:col-span-2">
                   <Select value={data.eventType} onValueChange={(v) => update("eventType", v)}>
-                    <SelectTrigger><SelectValue placeholder="Choose a type" /></SelectTrigger>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a type" />
+                    </SelectTrigger>
                     <SelectContent>
-                      {["Worship", "Outreach", "Conference", "Fundraiser", "Training", "Social", "Other"].map((r) => (
-                        <SelectItem key={r} value={r}>{r}</SelectItem>
+                      {[
+                        "Worship",
+                        "Outreach",
+                        "Conference",
+                        "Fundraiser",
+                        "Training",
+                        "Social",
+                        "Other",
+                      ].map((r) => (
+                        <SelectItem key={r} value={r}>
+                          {r}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -241,7 +310,7 @@ export function IntakeWizard() {
                           onCheckedChange={(v) => {
                             update(
                               "support",
-                              v ? [...data.support, area] : data.support.filter((s) => s !== area)
+                              v ? [...data.support, area] : data.support.filter((s) => s !== area),
                             );
                           }}
                         />
@@ -257,11 +326,24 @@ export function IntakeWizard() {
               <div className="space-y-6">
                 {data.support.includes("AV") && (
                   <ConditionalCard title="AV">
-                    <ToggleRow label="Stream / record?" value={data.av.stream} onChange={(v) => update("av", { ...data.av, stream: v })} />
-                    <ToggleRow label="Presentation needed?" value={data.av.presentation} onChange={(v) => update("av", { ...data.av, presentation: v })} />
+                    <ToggleRow
+                      label="Stream / record?"
+                      value={data.av.stream}
+                      onChange={(v) => update("av", { ...data.av, stream: v })}
+                    />
+                    <ToggleRow
+                      label="Presentation needed?"
+                      value={data.av.presentation}
+                      onChange={(v) => update("av", { ...data.av, presentation: v })}
+                    />
                     <Field label="Complexity">
-                      <Select value={data.av.complexity} onValueChange={(v) => update("av", { ...data.av, complexity: v as never })}>
-                        <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                      <Select
+                        value={data.av.complexity}
+                        onValueChange={(v) => update("av", { ...data.av, complexity: v as never })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="low">Low</SelectItem>
                           <SelectItem value="medium">Medium</SelectItem>
@@ -273,26 +355,57 @@ export function IntakeWizard() {
                 )}
                 {data.support.includes("Culinary") && (
                   <ConditionalCard title="Culinary">
-                    <ToggleRow label="Meal needed?" value={data.culinary.meal} onChange={(v) => update("culinary", { ...data.culinary, meal: v })} />
+                    <ToggleRow
+                      label="Meal needed?"
+                      value={data.culinary.meal}
+                      onChange={(v) => update("culinary", { ...data.culinary, meal: v })}
+                    />
                     <Field label="Guest estimate">
-                      <Input type="number" value={data.culinary.guests} onChange={(e) => update("culinary", { ...data.culinary, guests: e.target.value })} placeholder="e.g. 80" />
+                      <Input
+                        type="number"
+                        value={data.culinary.guests}
+                        onChange={(e) =>
+                          update("culinary", { ...data.culinary, guests: e.target.value })
+                        }
+                        placeholder="e.g. 80"
+                      />
                     </Field>
                   </ConditionalCard>
                 )}
                 {data.support.includes("Marketing") && (
                   <ConditionalCard title="Marketing">
                     <Field label="Assets needed">
-                      <Input value={data.marketing.assets} onChange={(e) => update("marketing", { ...data.marketing, assets: e.target.value })} placeholder="Flyer, social, web banner…" />
+                      <Input
+                        value={data.marketing.assets}
+                        onChange={(e) =>
+                          update("marketing", { ...data.marketing, assets: e.target.value })
+                        }
+                        placeholder="Flyer, social, web banner…"
+                      />
                     </Field>
                     <Field label="Deadline">
-                      <Input type="date" value={data.marketing.deadline} onChange={(e) => update("marketing", { ...data.marketing, deadline: e.target.value })} />
+                      <Input
+                        type="date"
+                        value={data.marketing.deadline}
+                        onChange={(e) =>
+                          update("marketing", { ...data.marketing, deadline: e.target.value })
+                        }
+                      />
                     </Field>
                   </ConditionalCard>
                 )}
                 {data.support.includes("IT") && (
                   <ConditionalCard title="IT">
-                    <ToggleRow label="Registration needed?" value={data.it.registration} onChange={(v) => update("it", { ...data.it, registration: v })} />
-                    <ToggleRow label="Check-in needed?" value={data.it.checkIn} onChange={(v) => update("it", { ...data.it, checkIn: v })} />
+                    <ToggleRow
+                      label="Registration needed?"
+                      value={data.it.registration}
+                      onChange={(v) => update("it", { ...data.it, registration: v })}
+                    />
+                    <ToggleRow
+                      label="Check-in needed?"
+                      value={data.it.checkIn}
+                      onChange={(v) => update("it", { ...data.it, checkIn: v })}
+                    />
                   </ConditionalCard>
                 )}
               </div>
@@ -306,28 +419,51 @@ export function IntakeWizard() {
                   onChange={(e) => update("description", e.target.value)}
                   placeholder="3–4 sentences describing the event, audience, and goal."
                 />
-                <p className="mt-2 text-xs text-muted-foreground">{data.description.length} characters</p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {data.description.length} characters
+                </p>
               </Field>
             )}
 
             {current.id === "review" && (
               <div className="space-y-6">
-                <ReviewSection title="Requestor" rows={[
-                  ["Ministry", data.ministry], ["Contact", data.contactName],
-                  ["Email", data.email], ["Phone", data.phone || "—"],
-                ]} />
-                <ReviewSection title="Event" rows={[
-                  ["Name", data.eventName], ["Date", data.date],
-                  ["Time", `${data.startTime} – ${data.endTime}`],
-                  ["Location", `${data.locationType}${data.locationDetails ? ` · ${data.locationDetails}` : ""}`],
-                ]} />
-                <ReviewSection title="Scope" rows={[
-                  ["Attendance", data.attendance], ["Budget", data.budget], ["Type", data.eventType],
-                ]} />
+                <ReviewSection
+                  title="Requestor"
+                  rows={[
+                    ["Ministry", data.ministry],
+                    ["Contact", data.contactName],
+                    ["Email", data.email],
+                    ["Phone", data.phone || "—"],
+                  ]}
+                />
+                <ReviewSection
+                  title="Event"
+                  rows={[
+                    ["Name", data.eventName],
+                    ["Date", data.date],
+                    ["Time", `${data.startTime} – ${data.endTime}`],
+                    [
+                      "Location",
+                      `${data.locationType}${data.locationDetails ? ` · ${data.locationDetails}` : ""}`,
+                    ],
+                  ]}
+                />
+                <ReviewSection
+                  title="Scope"
+                  rows={[
+                    ["Attendance", data.attendance],
+                    ["Budget", data.budget],
+                    ["Type", data.eventType],
+                  ]}
+                />
                 <div>
                   <h3 className="mb-2 text-lg">Support Needed</h3>
                   <div className="flex flex-wrap gap-2">
-                    {data.support.map((s) => <Badge key={s} variant="secondary">{s}</Badge>)}
+                    {data.support.map((s) => (
+                      <Badge key={s} variant="secondary">
+                        {s}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
                 <ReviewSection title="Description" rows={[["", data.description]]} />
@@ -367,8 +503,16 @@ export function IntakeWizard() {
 }
 
 function Field({
-  label, required, children, className,
-}: { label: string; required?: boolean; children: React.ReactNode; className?: string }) {
+  label,
+  required,
+  children,
+  className,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div className={className}>
       <Label className="mb-2 inline-block text-sm font-medium">
@@ -380,7 +524,15 @@ function Field({
   );
 }
 
-function ToggleRow({ label, value, onChange }: { label: string; value: boolean; onChange: (v: boolean) => void }) {
+function ToggleRow({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <div className="flex items-center justify-between rounded-lg border bg-background p-3">
       <span className="text-sm font-medium">{label}</span>

@@ -30,10 +30,19 @@ export interface IntakeFormData {
 }
 
 export const initialData: IntakeFormData = {
-  ministry: "", contactName: "", email: "", phone: "",
-  eventName: "", date: "", startTime: "", endTime: "",
-  locationType: "", locationDetails: "",
-  attendance: "", budget: "", eventType: "",
+  ministry: "",
+  contactName: "",
+  email: "",
+  phone: "",
+  eventName: "",
+  date: "",
+  startTime: "",
+  endTime: "",
+  locationType: "",
+  locationDetails: "",
+  attendance: "",
+  budget: "",
+  eventType: "",
   support: [],
   av: { stream: false, presentation: false, complexity: "" },
   culinary: { meal: false, guests: "" },
