@@ -129,7 +129,7 @@ export function IntakeWizard() {
         </div>
         <Progress value={progress} className="h-1.5" />
         <div className="mt-6">
-          <h2 className="text-3xl sm:text-4xl">{current.title}</h2>
+          <h2 className="text-3xl sm:text-4xl font-display">{current.title}</h2>
           <p className="mt-1 text-muted-foreground">{current.subtitle}</p>
         </div>
       </div>
@@ -493,7 +493,12 @@ export function IntakeWizard() {
             <Check className="mr-2 h-4 w-4" /> Submit
           </Button>
         ) : (
-          <Button onClick={next}>
+          <Button
+            onClick={next}
+            size="lg"
+            style={{ background: "var(--gradient-brand)" }}
+            className="inline-flex items-center gap-1.5 rounded-lg px-10 py-2 text-[12.5px] font-medium text-white shadow-elev-sm hover:shadow-glow transition-all cursor-pointer"
+          >
             Continue <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         )}
