@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
 import {
   Outlet,
   Link,
@@ -9,6 +10,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+
+const AuthGate = lazy(() => import("@/components/auth/AuthGate"));
 
 function NotFoundComponent() {
   return (
@@ -113,7 +116,17 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <Suspense
+        fallback={
+          <div className="flex min-h-screen items-center justify-center bg-background text-sm text-muted-foreground">
+            Loading...
+          </div>
+        }
+      >
+        <AuthGate>
+          <Outlet />
+        </AuthGate>
+      </Suspense>
     </QueryClientProvider>
   );
 }
